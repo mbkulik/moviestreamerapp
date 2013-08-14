@@ -20,15 +20,12 @@
 	return self;
 }
 
--(void)dealloc
-{
-    [movie_dir release];
-    [super dealloc];
-}
 
 -(void)windowDidLoad
-{	
-	[path setStringValue:[[movie_dir get_moviedir] path]];
+{
+    NSURL *movie_location = [movie_dir get_moviedir];
+    
+	[path setStringValue:[movie_location path]];
 }
 
 -(IBAction)changePath:(id)sender
@@ -41,8 +38,9 @@
 	if( [dialog runModal ] )
 	{
         [movie_dir set_moviedir:[dialog URL]];
+         NSURL *movie_location = [movie_dir get_moviedir];
         
-		[path setStringValue:[[movie_dir get_moviedir] path]];
+		[path setStringValue:[movie_location path]];
 	}
 }
 
