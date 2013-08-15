@@ -16,9 +16,9 @@
 {
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
 	
-	if(![[[settings dictionaryRepresentation] allKeys] containsObject:DEFAULT_KEY])
+    if([settings objectForKey:DEFAULT_KEY] == nil )
 	{
-        return [NSURL URLWithString:[NSHomeDirectory() stringByAppendingString:@"Movies"]];
+        return [NSURL URLWithString:[NSHomeDirectory() stringByAppendingString:@"/Movies"]];
 	}
     else
     {
