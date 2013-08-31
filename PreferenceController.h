@@ -7,13 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "MovieDirectory.h"
-
 
 @interface PreferenceController : NSWindowController {
 	IBOutlet NSButton *browse_button;
 	IBOutlet NSTextField *path;
-    MovieDirectory* movie_dir;
 }
 
 -(IBAction)changePath:(id)sender;

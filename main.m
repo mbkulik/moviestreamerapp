@@ -8,12 +8,22 @@
 
 
 #import <Cocoa/Cocoa.h>
-#import "Browser.h"
+#import "HTTPServer.h"
+
+HTTPServer *httpServer;
+
+/*#import "Browser.h"
 #import "MovieDirectory.h"
 
-#include "mongoose.h"
+#import "CocoaHTTPServer/Core/HTTPServer.h"
+#import "CocoaHTTPServer/Vendor/CocoaLumberjack/DDLog.h"
+#import "CocoaHTTPServer/Vendor/CocoaLumberjack/DDTTYLogger.h"
 
-static int handler(struct mg_connection *conn)
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;*/
+
+//#include "mongoose.h"
+
+/*static int handler(struct mg_connection *conn)
 {
     @autoreleasepool {
         const struct mg_request_info *request_info = mg_get_request_info(conn);
@@ -72,22 +82,9 @@ static int handler(struct mg_connection *conn)
     
         return 1;
     }
-}
+}*/
 
 int main(int argc, char *argv[])
 {
-    struct mg_callbacks callbacks;
-	
-	const char *options[] = {
-		"listening_ports", "8080", 
-		"extra_mime_types", ".mp4=video/mp4,.m4v=video/mp4,.webm=video/webm",
-		NULL
-	};
-    
-    memset(&callbacks, 0, sizeof(callbacks));
-    callbacks.begin_request = handler;
-	
-	mg_start(&callbacks , NULL, options);
-	
     return NSApplicationMain(argc,  (const char **) argv);
 }

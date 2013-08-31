@@ -7,6 +7,13 @@
 //
 
 #import "PreferenceController.h"
+#import "HTTPServer.h"
+#import "defaults.h"
+#import "DDLog.h"
+
+extern HTTPServer *httpServer;
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+
 
 @implementation PreferenceController
 
@@ -14,8 +21,6 @@
 {
 	if(![super initWithWindowNibName:@"Preferences"])
 		return nil;
-	
-    movie_dir = [[MovieDirectory alloc] init];
     
 	return self;
 }
@@ -23,9 +28,15 @@
 
 -(void)windowDidLoad
 {
-    NSURL *movie_location = [movie_dir get_moviedir];
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+	
+    if([settings objectForKey:DEFAULT_KEY] == nil )
+	{
+        [settings setValue:[NSHomeDirectory() stringByAppendingString:@"/Movies"] forKey:DEFAULT_KEY];
+        [settings synchronize];
+	}
     
-	[path setStringValue:[movie_location path]];
+    [path setStringValue:[settings stringForKey:DEFAULT_KEY]];
 }
 
 -(IBAction)changePath:(id)sender
@@ -37,10 +48,21 @@
 	
 	if( [dialog runModal ] )
 	{
-        [movie_dir set_moviedir:[dialog URL]];
-         NSURL *movie_location = [movie_dir get_moviedir];
+        NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+         
+        [settings setValue:[[dialog URL] path] forKey:DEFAULT_KEY];
+        [settings synchronize];
         
-		[path setStringValue:[movie_location path]];
+        [httpServer stop];
+        [httpServer setDocumentRoot:[settings stringForKey:DEFAULT_KEY]];
+        
+        NSError *error = nil;
+        if(![httpServer start:&error])
+        {
+            DDLogError(@"Error starting HTTP Server: %@", error);
+        }
+        
+		[path setStringValue:[settings stringForKey:DEFAULT_KEY]];
 	}
 }
 
