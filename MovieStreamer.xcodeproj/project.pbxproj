@@ -288,8 +288,8 @@
 				0463E55915979887001D738D /* AppController.m */,
 				049C9CD617D154CA001B4D18 /* AppDelegate.h */,
 				049C9CD717D154CA001B4D18 /* AppDelegate.m */,
-				042D62E21679806800051B0C /* Browser.m */,
 				042D62E4167980E900051B0C /* Browser.h */,
+				042D62E21679806800051B0C /* Browser.m */,
 				049C9CD917D1729B001B4D18 /* Connection.h */,
 				049C9CDA17D1729B001B4D18 /* Connection.m */,
 			);

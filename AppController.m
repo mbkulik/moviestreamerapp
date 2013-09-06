@@ -13,12 +13,12 @@
 
 -(IBAction) showPreferencePanel:(id)sender
 {
-		if( !preferenceController)
-		{
-			preferenceController =[[PreferenceController alloc] init];
-		}
+    if( !preferenceController)
+    {
+        preferenceController =[[PreferenceController alloc] init];
+    }
 			 
-		[preferenceController showWindow:self];
+    [preferenceController showWindow:self];
 }
 
 @end

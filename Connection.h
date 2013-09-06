@@ -10,5 +10,4 @@
 #import "HTTPConnection.h"
 
 @interface Connection : HTTPConnection
-
 @end

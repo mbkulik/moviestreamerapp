@@ -10,5 +10,4 @@
 @class HTTPServer;
 
 @interface AppDelegate : NSObject
-
 @end
